@@ -7,7 +7,9 @@ import './paginator.css';
 class Paginator extends Component {
     render() {
         return(
-            <button className="paginator">Paginator</button>
+            <div className="paginator">
+                <button>Paginator</button>
+            </div>
         )
     }
 }

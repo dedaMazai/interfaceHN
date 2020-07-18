@@ -13,6 +13,10 @@
   background: #c3c3ce;
   color: #59687a;;
 }
+.searchInput:focus {
+  background: #c3c3cee1;
+  border: 2px solid #4e5f75;
+}
 .searchBut {
   position: absolute; 
   top: 0;
@@ -23,4 +27,7 @@
   background: #59687a;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
+}
+.searchBut:active {
+  background: #48576b;
 }

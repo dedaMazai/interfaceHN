@@ -16,10 +16,13 @@ li {
     border-radius: 5px 5px 0px 0px;
 }
 .bodyResult{
-    background-color: #59687a;
+    background-color: #59687ab7;
     border-radius: 5px;
     margin: 0px 10px 10px 10px;
     padding: 20px;
+}
+.bodyResult:hover{
+    background-color: #59687a;
 }
 .paginatorResult{
     padding-bottom: 10px;

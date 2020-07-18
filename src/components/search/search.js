@@ -8,7 +8,7 @@ export default class Search extends Component {
     render() {
         return(
             <div className="search">
-                <input className="searchInput" type="text" placeholder="Искать здесь..."/>
+                <input className="searchInput" onkeyup="stule:background: #ff5e00;" type="text" placeholder="Искать здесь..."/>
                 <button className="searchBut" type="submit">
                    <span role="img">
                         &#128269;
