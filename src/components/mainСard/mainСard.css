@@ -1,0 +1,65 @@
+.mainСard {
+    position: relative;
+    width: 900px;
+    margin: 30px auto;
+    background-color: #c3c3ce;
+    border-radius: 5px;
+    padding: 30px;
+    overflow: hidden;
+    min-height: 600px;
+}
+.nameCard {
+    position: absolute;
+    margin-left: 0px;
+    font-size: 200%;
+}
+.starsCard {
+    padding: 0px 10px 3px 10px;
+    background-color: #59687a;
+    border-radius: 15px;
+    position: absolute;
+    margin-left: 580px;
+    font-size: 125%;
+    color: rgb(227, 228, 198);
+}
+.starsSpan {
+    font-size: 140%;
+}
+.commitCard {
+    position: absolute;
+    margin-left: 700px;
+    text-align: center;
+}
+.photo {
+    float: left;
+    width: 250px;
+    margin-top: 80px;
+}
+img {
+    border-radius: 5px;
+    height: 200px;
+}
+.information {
+    float: left;
+    width: 500px;
+    margin: 80px 0px 0px 10px;
+}
+.contributors {
+    margin-top: 10px;
+}
+.nick {
+    font-size: 170%;
+    color: rgb(4, 0, 255) !important;
+}
+.exitBut {
+    position:absolute;
+    bottom: 50px;
+    left: 50px;
+    width: 75px;
+    height: 40px;
+    border: none;
+    background: #59687a;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
