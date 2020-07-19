@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {selectBut} from '../../actions';
+import {selectBut, upButtons, lowerButtons} from '../../actions';
 
 import './paginator.css';
 
@@ -20,7 +20,7 @@ class Paginator extends Component {
     // }
 
     render() {
-        let {pageSize, totalCount, paginatorCount} = this.props,
+        let {pageSize, totalCount, paginatorCount, selectBut, lowerButtons, upButtons} = this.props,
             pageCount = Math.ceil(totalCount / pageSize),
             page = [];
 
@@ -30,12 +30,19 @@ class Paginator extends Component {
 
         return(
             <div className="paginator">
+                <button className="allPage"
+                        disabled={paginatorCount===1 ? true : false}
+                        onClick={() => lowerButtons()}>&larr;</button>
+                
                 {page.map((list) => {
-                    return <span
+                    return <button
                         className={paginatorCount===list?"selectedPage":"allPage"}
-                        onClick={() => this.props.selectBut(list)}>{list}</span>
+                        onClick={() => selectBut(list)}>{list}</button>
                     })
                 }
+                <button className="allPage"
+                        disabled={paginatorCount===pageCount ? true : false}
+                        onClick={() => upButtons(pageCount)}>&rarr;</button>
             </div>
         )
     }
@@ -49,7 +56,9 @@ const mapStateToProps =  (state) =>{
 }
 
 const mapDispatchToProps = {
-    selectBut
+    selectBut,
+    lowerButtons,
+    upButtons
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Paginator);

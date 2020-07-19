@@ -17,3 +17,6 @@
     margin: 2px;
     padding: 1px 6px 1px 6px;
 }
+.allPage:active {
+    background: #3d4652;
+}

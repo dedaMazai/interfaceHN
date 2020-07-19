@@ -5,6 +5,21 @@ const selectBut = (id) => {
     }
 }
 
+const upButtons = (count) => {
+    return {
+        type: 'UP_BUTTONS',
+        payload: count
+    }
+}
+
+const lowerButtons = () => {
+    return {
+        type: 'LOWER_BUTTONS'
+    }
+}
+
 export {
-    selectBut
+    selectBut,
+    upButtons,
+    lowerButtons
 };
