@@ -22,7 +22,9 @@
     font-size: 125%;
     color: rgb(227, 228, 198);
 }
-.starsSpan {
+.starBig {
+    color: yellow;
+    margin-right: 3px;
     font-size: 140%;
 }
 .commitCard {

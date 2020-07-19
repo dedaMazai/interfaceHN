@@ -1,36 +1,32 @@
 const initialState = {
-    page: 25,
-    buttons: 0,
+    content: [
+        { id: 1, name: 'Re' },
+        { id: 2, name: 'Air' },
+        { id: 3, name: 'Doc' },
+        { id: 4, name: 'Memento' },
+        { id: 5, name: 'Braveheart' },
+        { id: 6, name: 'Beauty' },
+        { id: 7, name: 'Seven' },
+        { id: 8, name: 'Beauty' },
+        { id: 9, name: 'Seven' },
+        { id: 10, name: 'Beauty' },
+        { id: 11, name: 'Seven' },
+        { id: 12, name: 'Beauty' },
+        { id: 13, name: 'Seven' },
+        { id: 14, name: 'Samurai' }
+    ],
+    pageSize: 10,
+    paginatorCount: 4,
+    totalCount: 44,
     error: false
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'RUN_AUTH':
-            return {
-                ...state,
-                showApp: 1
-            };
-        case 'RUN_APP':
-            return {
-                ...state,
-                showApp: 2,
-                buttons: 0
-            };
-        case 'MENU_ERROR':
-            return {
-                ...state,
-                error: true
-            };
         case 'SELECT_BUTTONS':
             return {
                 ...state,
-                buttons: action.payload
-            };
-        case 'ONWARD':
-            return {
-                ...state,
-                buttons: ++state.buttons
+                paginatorCount: action.payload
             };
         default:
             return state;

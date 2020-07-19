@@ -15,7 +15,7 @@ export default class MainСard extends Component {
                         Название
                     </li>
                     <li className="starsCard">
-                        <span className="starsSpan">&#9733;</span>25
+                        <span className="starBig">&#9733;</span>25
                     </li>
                     <li className="commitCard">
                         <p>Последний комит:</p>

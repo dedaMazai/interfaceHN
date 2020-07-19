@@ -1,22 +1,11 @@
 import React, {Component} from 'react';
 import Paginator from '../paginator';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import './result.css';
 
-export default class Result extends Component {
-    Movies = [
-        { id: 1, name: 'Re' },
-        { id: 2, name: 'Air' },
-        { id: 3, name: 'Doc' },
-        { id: 4, name: 'Memento' },
-        { id: 5, name: 'Braveheart' },
-        { id: 6, name: 'Beauty' },
-        { id: 7, name: 'Seven' },
-        { id: 8, name: 'Samurai' }
-      ];
-    
+class Result extends Component {
     render() {
         return(
             <div className="result">
@@ -35,7 +24,7 @@ export default class Result extends Component {
                     </li>
                 </ul>
                 <ul>
-                    {this.Movies.map(data => (
+                    {this.props.content.map(data => (
                         <Link to = "/card">
                             <li className="line" key={data.id}>
                                 <ul className="bodyResult">
@@ -43,7 +32,7 @@ export default class Result extends Component {
                                         {data.name}
                                     </li>
                                     <li className="stars">
-                                        <span>&#9733;</span>{data.name}
+                                        <span className="starSmall">&#9733;</span>{data.name}
                                     </li>
                                     <li className="commit">
                                         {data.name}
@@ -63,10 +52,10 @@ export default class Result extends Component {
         )
     }
 }
-// const mapStateToProps =  (state) =>{
-//     return {
-//         showApp: state.showApp
-//     }
-// }
+const mapStateToProps =  (state) =>{
+    return {
+        content: state.content
+    }
+}
 
-// export default connect(mapStateToProps)(Result);
+export default connect(mapStateToProps)(Result);
