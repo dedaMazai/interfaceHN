@@ -16,7 +16,7 @@ const initialState = {
     ],
     pageSize: 5,
     paginatorCount: 1,
-    totalCount: 35,
+    totalCount: 90,
     error: false
 }
 
@@ -32,10 +32,20 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 paginatorCount: state.paginatorCount < action.payload ? state.paginatorCount+1 : state.paginatorCount
             };
+        case 'UP_BUTTONS_THREE':
+            return {
+                ...state,
+                paginatorCount: state.paginatorCount < action.payload-5 ? state.paginatorCount+3 : state.paginatorCount
+            };
         case 'LOWER_BUTTONS':
             return {
                 ...state,
                 paginatorCount: state.paginatorCount > 1 ? state.paginatorCount-1 : state.paginatorCount
+            };
+        case 'LOWER_BUTTONS_THREE':
+            return {
+                ...state,
+                paginatorCount: state.paginatorCount > 5 ? state.paginatorCount-3 : state.paginatorCount
             };
         default:
             return state;
