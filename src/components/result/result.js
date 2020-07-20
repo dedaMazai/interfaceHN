@@ -1,16 +1,31 @@
 import React, {Component} from 'react';
 import Paginator from '../paginator';
+import gotService from '../../services/gotService';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './result.css';
 
 class Result extends Component {
+    gotService = new gotService();
+
+    updateChar = () => {
+        this.gotService.getRepositories()
+            .then(this.onTelLoaded)
+            .catch(function(e) {
+                console.log(`ERROR${e}`)
+             });
+    }
+
+    onTelLoaded = (tel) => {
+        console.log(tel)
+    }
+
     render() {
         return(
             <div className="result">
                 <ul className="headerResult">
-                    <li className="name">
+                    <li className="name" onClick={this.updateChar}>
                         Название
                     </li>
                     <li className="stars">
