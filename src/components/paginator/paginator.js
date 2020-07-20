@@ -27,7 +27,7 @@ class Paginator extends Component {
         for (let i=2; i<pageCount; i++) {
             page.push(i);
         }
-        
+
         if (paginatorCount < 5){
             page.splice(4);
         } else if (paginatorCount === 5) {
@@ -40,6 +40,7 @@ class Paginator extends Component {
             page.splice(paginatorCount+1);
             page.splice(0, paginatorCount-4);
         }
+        //можно было оставить только последнее else, но будет не так комфортно юзать пагинатор
 
         return(
             <div className="paginator">

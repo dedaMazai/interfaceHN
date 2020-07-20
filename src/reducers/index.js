@@ -14,9 +14,9 @@ const initialState = {
         { id: 12, name: 'Beauty' },
         { id: 13, name: 'Seven' }
     ],
-    pageSize: 5,
+    pageSize: 10,
     paginatorCount: 1,
-    totalCount: 90,
+    totalCount: 115,
     error: false
 }
 
@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
         case 'UP_BUTTONS_THREE':
             return {
                 ...state,
-                paginatorCount: state.paginatorCount < action.payload-5 ? state.paginatorCount+3 : state.paginatorCount
+                paginatorCount: state.paginatorCount < action.payload-4 ? state.paginatorCount+3 : state.paginatorCount
             };
         case 'LOWER_BUTTONS':
             return {
