@@ -2,34 +2,61 @@ import React, {Component} from 'react';
 import gotService from '../../services/gotService';
 import { connect } from 'react-redux';
 import ErrorMessage from '../errorMessage';
-import {onError} from '../../actions';
+import {onError, setContent, setRequest} from '../../actions';
 
 import './search.css';
 
 class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.searchRepos = React.createRef();
+        this.state = {
+            request: "",
+        };
+      }
 
     gotService = new gotService();
 
-    updateRepositories = () => {
-        this.gotService.getRepositories()
-            .then(this.onTelLoaded)
-            .catch((e) => {this.props.onError(e)});
+    onErr = (e) => {
+        this.props.onError();
+        console.log('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
     }
 
-    onTelLoaded = (tel) => {
-        console.log(tel)
+    updateRepositories = () => {
+        this.props.setRequest(this.state.request)
+        this.gotService.getRepositories(this.searchRepos.current.value, 1)
+            .then(this.props.setContent)
+            .catch(this.onErr);
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.paginatorCount !== prevProps.paginatorCount) {
+            this.gotService.getRepositories(this.props.request,this.props.paginatorCount)
+            .then(this.props.setContent)
+            .catch(this.onErr);
+          }
+    }
+
+    searchName = () => {this.setState({request: this.searchRepos.current.value})}
     render() {
         if (this.props.error){
             return <ErrorMessage/>
         }
         return(
             <div className="search">
-                <input className="searchInput" onkeyup="stule:background: #ff5e00;" type="text" placeholder="Искать здесь..."/>
-                <button className="searchBut" type="submit" onClick={this.updateRepositories}>
-                   <span role="img">
-                        &#128269;
-                   </span>
+                <input className="searchInput"
+                    onkeyup="stule:background: #ff5e00;"
+                    type="text"
+                    placeholder="Искать здесь..."
+                    ref={this.searchRepos}
+                    onChange={this.searchName}/>
+                <button className="searchBut"
+                    type="submit"
+                    disabled={this.state.request === "" ? true : false}
+                    onClick={this.updateRepositories}>
+                        <span role="img">
+                            &#128269;
+                        </span>
                 </button>
             </div>
         )
@@ -38,11 +65,15 @@ class Search extends Component {
 
 const mapStateToProps =  (state) =>{
     return {
-        error: state.error
+        error: state.error,
+        paginatorCount: state.paginatorCount,
+        request: state.request
     }
 }
 
 const mapDispatchToProps = {
+    setContent,
+    setRequest,
     onError
 }
 

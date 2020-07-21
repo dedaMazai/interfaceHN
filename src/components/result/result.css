@@ -32,27 +32,31 @@ li {
     position: absolute;
     margin-left: 0px;
     margin-top: -10px;
+    width: 280px;
 }
 .stars {
     position: absolute;
     margin-left: 280px;
     margin-top: -10px;
+    width: 150px;
 }
 .commit {
     position: absolute;
     margin-left: 430px;
     margin-top: -10px;
+    width: 150px;
 }
 .link {
     position: absolute;
     margin-left: 600px;
     margin-top: -10px;
+    width: 250px;
 }
-.link1 {
+/* .link1 {
     position: absolute;
     margin-left: 680px;
     margin-top: -10px;
-}
+} */
 .starSmall {
     color: yellow;
     margin-right: 3px;

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Paginator from '../paginator';
-import gotService from '../../services/gotService';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -8,7 +7,14 @@ import './result.css';
 
 class Result extends Component {
 
-    // gotService = new gotService();
+
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.paginatorCount !== prevProps.paginatorCount) {
+    //         this.gotService.getRepositories(this.props.request,this.props.paginatorCount)
+    //         .then(this.props.setContent)
+    //         .catch(this.onErr);
+    //       }
+    // }
 
     // updateChar = () => {
     //     this.gotService.getRepositories()
@@ -26,7 +32,7 @@ class Result extends Component {
         return(
             <div className="result">
                 <ul className="headerResult">
-                    <li className="name" onClick={this.updateChar}>
+                    <li className="name">
                         Название
                     </li>
                     <li className="stars">
@@ -35,26 +41,26 @@ class Result extends Component {
                     <li className="commit">
                         Последний комит
                     </li>
-                    <li className="link1">
-                        Ссылка
+                    <li className="link">
+                        Ссылка: https://github.com...
                     </li>
                 </ul>
                 <ul>
                     {this.props.content.map(data => (
                         <Link to = "/card">
-                            <li className="line" key={data.id}>
+                            <li className="line">
                                 <ul className="bodyResult">
                                     <li className="name">
                                         {data.name}
                                     </li>
                                     <li className="stars">
-                                        <span className="starSmall">&#9733;</span>{data.name}
+                                        <span className="starSmall">&#9733;</span>{data.stars}
                                     </li>
                                     <li className="commit">
-                                        {data.name}
+                                        {data.lastCommit}
                                     </li>
                                     <li className="link">
-                                        {data.name}111111111111111
+                                        {data.urlRepositories}
                                     </li>
                                 </ul>
                             </li>

@@ -13,9 +13,8 @@ export default class GotService {
         return await res.json();
     }
 
-    getRepositories = async (request) => {
-        // const Repositories = await this.getResource(`/repositories?q=${request}&sort=stars&order=desc`);
-        const Repositories = await this.getResource(`/repositories?q=tetris+language:assembly&sort=stars&order=descpage=1&per_page=10`);
+    getRepositories = async (request, page) => {
+        const Repositories = await this.getResource(`/repositories?q=${request}+in:name&sort=stars&order=desc&page=${page}&per_page=10`);
         return this._transformRepositories(Repositories);
     }
 
@@ -24,6 +23,13 @@ export default class GotService {
             return data
         } else {
             return 'This information is not available'
+        }
+    }
+    isSetCount(data) {
+        if (data) {
+            return data
+        } else {
+            return 0
         }
     }
 
@@ -39,7 +45,7 @@ export default class GotService {
 
     _transformRepositories = (Reposit) => {
         return {
-            totalCount: this.isSet(Reposit.total_count),
+            totalCount: this.isSetCount(Reposit.total_count),
             items: Reposit.items.map((data) =>{
                 return (
                     {name: this.isSet(data.name),

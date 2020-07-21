@@ -1,24 +1,10 @@
 const initialState = {
-    content: [
-        { id: 1, name: 'Re' },
-        { id: 2, name: 'Air' },
-        { id: 3, name: 'Doc' },
-        { id: 4, name: 'Memento' },
-        { id: 5, name: 'Braveheart' },
-        { id: 6, name: 'Beauty' },
-        { id: 7, name: 'Seven' },
-        { id: 8, name: 'Beauty' },
-        { id: 9, name: 'Seven' },
-        { id: 10, name: 'Beauty' },
-        { id: 11, name: 'Seven' },
-        { id: 12, name: 'Beauty' },
-        { id: 13, name: 'Seven' }
-    ],
+    content: [],
     pageSize: 10,
     paginatorCount: 1,
-    totalCount: 115,
-    error: false,
-    errorMassage: ""
+    totalCount: 1,
+    request: "",
+    error: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,28 +14,38 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 paginatorCount: action.payload
             };
+        case 'SET_REQUEST':
+            return {
+                ...state,
+                request: action.payload
+            };
+        case 'SET_CONTENT':
+            return {
+                ...state,
+                content: action.payload,
+                totalCount: action.loadCount,
+            };
         case 'ON_ERROR':
             return {
                 ...state,
-                error: true,
-                errorMassage: "Ошибка " + action.payload.name + ":" + action.payload.message + "\n" + action.payload.stack
+                error: true
             };
-        case 'UP_BUTTONS':
+        case 'UP_BUTTONS(PAGINATOR)':
             return {
                 ...state,
                 paginatorCount: state.paginatorCount < action.payload ? state.paginatorCount+1 : state.paginatorCount
             };
-        case 'UP_BUTTONS_THREE':
+        case 'UP_BUTTONS_THREE(PAGINATOR)':
             return {
                 ...state,
                 paginatorCount: state.paginatorCount < action.payload-4 ? state.paginatorCount+3 : state.paginatorCount
             };
-        case 'LOWER_BUTTONS':
+        case 'LOWER_BUTTONS(PAGINATOR)':
             return {
                 ...state,
                 paginatorCount: state.paginatorCount > 1 ? state.paginatorCount-1 : state.paginatorCount
             };
-        case 'LOWER_BUTTONS_THREE':
+        case 'LOWER_BUTTONS_THREE(PAGINATOR)':
             return {
                 ...state,
                 paginatorCount: state.paginatorCount > 5 ? state.paginatorCount-3 : state.paginatorCount

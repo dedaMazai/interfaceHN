@@ -6,6 +6,7 @@ import './paginator.css';
 
 
 class Paginator extends Component {
+
     // constructor(props) {
     //     super(props);
     //     this.myRefReg = React.createRef();
@@ -21,12 +22,13 @@ class Paginator extends Component {
 
     render() {
         let {pageSize, totalCount, paginatorCount, selectBut, lowerButtons, upButtons, upButtonsThree, lowerButtonsThree} = this.props,
-            pageCount = Math.ceil(totalCount / pageSize),
+            pageCount = Math.ceil(totalCount / pageSize) < 100  ? Math.ceil(totalCount / pageSize) : 100,
             page = [];
 
-        for (let i=2; i<pageCount; i++) {
+        for (let i=2; i < pageCount; i++) {
             page.push(i);
         }
+
 
         if (paginatorCount < 5){
             page.splice(4);
@@ -67,6 +69,7 @@ class Paginator extends Component {
                     onClick={() => upButtonsThree(pageCount)}>...</button>
                 <button
                     className={paginatorCount===pageCount?"selectedPage":"allPage"}
+                    hidden={pageCount === 1 || pageCount === 0 ? true : false}
                     onClick={() => selectBut(pageCount)}>{pageCount}</button>
                 <button
                     className="allPage"
