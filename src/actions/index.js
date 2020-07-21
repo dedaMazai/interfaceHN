@@ -5,6 +5,13 @@ const selectBut = (id) => {
     }
 }
 
+const onError = (e) => {
+    return {
+        type: 'ON_ERROR',
+        payload: e
+    }
+}
+
 const upButtons = (count) => {
     return {
         type: 'UP_BUTTONS',
@@ -36,5 +43,6 @@ export {
     upButtons,
     lowerButtons,
     upButtonsThree,
-    lowerButtonsThree
+    lowerButtonsThree,
+    onError
 };

@@ -7,19 +7,20 @@ import { connect } from 'react-redux';
 import './result.css';
 
 class Result extends Component {
-    gotService = new gotService();
 
-    updateChar = () => {
-        this.gotService.getRepositories()
-            .then(this.onTelLoaded)
-            .catch(function(e) {
-                console.log(`ERROR${e}`)
-             });
-    }
+    // gotService = new gotService();
 
-    onTelLoaded = (tel) => {
-        console.log(tel)
-    }
+    // updateChar = () => {
+    //     this.gotService.getRepositories()
+    //         .then(this.onTelLoaded)
+    //         .catch(function(e) {
+    //             console.log(`ERROR${e}`)
+    //          });
+    // }
+
+    // onTelLoaded = (tel) => {
+    //     console.log(tel)
+    // }
 
     render() {
         return(

@@ -17,7 +17,8 @@ const initialState = {
     pageSize: 10,
     paginatorCount: 1,
     totalCount: 115,
-    error: false
+    error: false,
+    errorMassage: ""
 }
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +27,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 paginatorCount: action.payload
+            };
+        case 'ON_ERROR':
+            return {
+                ...state,
+                error: true,
+                errorMassage: "Ошибка " + action.payload.name + ":" + action.payload.message + "\n" + action.payload.stack
             };
         case 'UP_BUTTONS':
             return {
