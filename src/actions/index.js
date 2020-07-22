@@ -12,6 +12,13 @@ const setRequest = (id) => {
     }
 }
 
+const setMainCard = (id) => {
+    return {
+        type: 'SET_MAIN_CARD',
+        payload: id
+    }
+}
+
 const setContent = (id) => {
     return {
         type: 'SET_CONTENT',
@@ -60,5 +67,6 @@ export {
     lowerButtonsThree,
     setContent,
     setRequest,
+    setMainCard,
     onError
 };

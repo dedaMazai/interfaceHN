@@ -1,45 +1,47 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import img from './foto.jpg';
 import './mainСard.css';
 
 
-export default class MainСard extends Component {
+class MainСard extends Component {
     render() {
+        let {content, mainCard} = this.props;
         return (
             <div className="mainСard">
+                {console.log(mainCard)}
                 <ul className="headerCard">
                     <li className="nameCard">
-                        Название
+                        {content[mainCard].name}
                     </li>
                     <li className="starsCard">
                         <span className="starBig">&#9733;</span>25
                     </li>
                     <li className="commitCard">
                         <p>Последний комит:</p>
-                        <p>22.22.2020</p>
+                        <p>{content[mainCard].lastCommit}</p>
                     </li>
                 </ul>
                 <div className="photo">
-                    <img src={img} alt="Image preview..."/>
+                    <img src={content[mainCard].photo} alt="Image preview..."/>
                     <p className="contributors">
                         Top contributors: <br/>
-                        Челики
+                        {content[mainCard].contributorsUrl}
                     </p>
                 </div>
                 <div className="information">
-                    <a className="nick" href="https://vk.com/andrei0911">NickName</a>
+                    <a className="nick" href={content[mainCard].urlPerson}>{content[mainCard].nickName}</a>
                     <br/>
                     <p>
                         Используемые языки: <br/>
-                        JS,PHP...
+                        {content[mainCard].language}
                     </p>
                     <br/>
                     <p>
                         Описание репозитория: <br/>
-                        JS,PHP...описание пошлоОписание репозитория:описание пошлоОписание репозитория:
+                        {content[mainCard].description}
                     </p>
                 </div>
                 <Link to = "/">
@@ -50,10 +52,11 @@ export default class MainСard extends Component {
     }
 }
 
-// const mapStateToProps =  (state) =>{
-//     return {
-//         showApp: state.showApp
-//     }
-// }
+const mapStateToProps =  (state) =>{
+    return {
+        content: state.content,
+        mainCard: state.mainCard
+    }
+}
 
-// export default connect(mapStateToProps)(Result);
+export default connect(mapStateToProps)(MainСard);

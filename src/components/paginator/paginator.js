@@ -73,7 +73,7 @@ class Paginator extends Component {
                     onClick={() => selectBut(pageCount)}>{pageCount}</button>
                 <button
                     className="allPage"
-                    disabled={paginatorCount===pageCount ? true : false}
+                    disabled={paginatorCount===pageCount || pageCount === 0 ? true : false}
                     onClick={() => upButtons(pageCount)}>&rarr;</button>
             </div>
         )

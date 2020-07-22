@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Paginator from '../paginator';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {setMainCard} from '../../actions';
 
 import './result.css';
 
@@ -48,9 +49,9 @@ class Result extends Component {
                 <ul>
                     {this.props.content.map(data => (
                         <Link to = "/card">
-                            <li className="line">
+                            <li key={data.id} className="line" onClick={()=>this.props.setMainCard(data.id)}>
                                 <ul className="bodyResult">
-                                    <li className="name">
+                                    <li className="name" >
                                         {data.name}
                                     </li>
                                     <li className="stars">
@@ -76,8 +77,14 @@ class Result extends Component {
 }
 const mapStateToProps =  (state) =>{
     return {
-        content: state.content
+        content: state.content,
+        mainCard: state.mainCard
     }
 }
 
-export default connect(mapStateToProps)(Result);
+const mapDispatchToProps = {
+    setMainCard
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Result);

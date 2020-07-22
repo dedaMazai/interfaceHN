@@ -19,33 +19,29 @@ class Search extends Component {
         console.log('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
     }
 
-    updateRepositories = () => {
-        this.gotService.getRepositories(this.props.request, 1)
+    updateRepositories = (request, num) => {
+        this.gotService.getRepositories(request, num)
             .then(this.props.setContent)
             .catch(this.onErr);
     }
 
     componentDidMount(){
-        if (localStorage.request !== ""){
-            this.searchRepos.current.value=localStorage.request;
+        if (sessionStorage.request !== ""){
+            this.searchRepos.current.value=sessionStorage.request;
             this.props.setRequest(this.searchRepos.current.value)
-            this.gotService.getRepositories(localStorage.request, this.props.paginatorCount)
-            .then(this.props.setContent)
-            .catch(this.onErr);
+            this.updateRepositories(sessionStorage.request, this.props.paginatorCount)
         }
         // else{}
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.paginatorCount !== prevProps.paginatorCount) {
-            this.gotService.getRepositories(this.props.request,this.props.paginatorCount)
-            .then(this.props.setContent)
-            .catch(this.onErr);
+            this.updateRepositories(this.props.request,this.props.paginatorCount)
           }
     }
 
     searchName = () => {this.props.setRequest(this.searchRepos.current.value);
-        localStorage.request =this.searchRepos.current.value}
+        sessionStorage.request =this.searchRepos.current.value}
 
 
 
@@ -64,7 +60,7 @@ class Search extends Component {
                 <button className="searchBut"
                     type="submit"
                     disabled={this.props.request === "" ? true : false}
-                    onClick={this.updateRepositories}>
+                    onClick={() => this.updateRepositories(this.props.request, 1)}>
                         <span role="img">
                             &#128269;
                         </span>

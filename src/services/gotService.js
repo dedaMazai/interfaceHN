@@ -31,12 +31,12 @@ export default class GotService {
         return item.match(updatedDate)[0];
     }
 
-    _extractUrlRepositories = (item) => {
-        const urlReposit = /(\bS*\b\/\b\b\S*\b)$/;
-        return item.match(urlReposit)[0];
-    }
-
+    // _extractUrlRepositories = (item) => {
+    //     const urlReposit = /(\bS*\b\/\b\b\S*\b)$/;
+    //     return item.match(urlReposit)[0];
+    // }
     _transformRepositories = (Reposit) => {
+    let i=0;
         return {
             totalCount: this.isSet(Reposit.total_count),
             items: Reposit.items.map((data) =>{
@@ -44,13 +44,14 @@ export default class GotService {
                     {name: this.isSet(data.name),
                     stars: this.isSet(data.stargazers_count),
                     lastCommit: this._extractDate(data.updated_at),
-                    urlRepositories: this._extractUrlRepositories(data.html_url),
+                    urlRepositories: this.isSet(data.html_url),
                     urlPerson: this.isSet(data.owner.html_url),
                     language: this.isSet(data.language),
                     nickName: this.isSet(data.owner.login),
                     description: this.isSet(data.description),
                     contributorsUrl: this.isSet(data.contributors_url),
-                    photo: this.isSet(data.owner.avatar_url)}
+                    photo: this.isSet(data.owner.avatar_url),
+                    id: i++}
                 )})
             };
     }
