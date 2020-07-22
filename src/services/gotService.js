@@ -22,13 +22,6 @@ export default class GotService {
         if (data) {
             return data
         } else {
-            return 'This information is not available'
-        }
-    }
-    isSetCount(data) {
-        if (data) {
-            return data
-        } else {
             return 0
         }
     }
@@ -45,7 +38,7 @@ export default class GotService {
 
     _transformRepositories = (Reposit) => {
         return {
-            totalCount: this.isSetCount(Reposit.total_count),
+            totalCount: this.isSet(Reposit.total_count),
             items: Reposit.items.map((data) =>{
                 return (
                     {name: this.isSet(data.name),

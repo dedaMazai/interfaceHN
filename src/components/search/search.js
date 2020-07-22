@@ -10,9 +10,6 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.searchRepos = React.createRef();
-        this.state = {
-            request: "",
-        };
       }
 
     gotService = new gotService();
@@ -23,8 +20,7 @@ class Search extends Component {
     }
 
     updateRepositories = () => {
-        this.props.setRequest(this.state.request)
-        this.gotService.getRepositories(this.searchRepos.current.value, 1)
+        this.gotService.getRepositories(this.props.request, 1)
             .then(this.props.setContent)
             .catch(this.onErr);
     }
@@ -37,7 +33,8 @@ class Search extends Component {
           }
     }
 
-    searchName = () => {this.setState({request: this.searchRepos.current.value})}
+    searchName = () => {this.props.setRequest(this.searchRepos.current.value)}
+
     render() {
         if (this.props.error){
             return <ErrorMessage/>
@@ -52,7 +49,7 @@ class Search extends Component {
                     onChange={this.searchName}/>
                 <button className="searchBut"
                     type="submit"
-                    disabled={this.state.request === "" ? true : false}
+                    disabled={this.props.request === "" ? true : false}
                     onClick={this.updateRepositories}>
                         <span role="img">
                             &#128269;

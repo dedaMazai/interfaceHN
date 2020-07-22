@@ -55,7 +55,7 @@ class Paginator extends Component {
                     onClick={() => selectBut(1)}>1</button>
                 <button
                     className="allPage"
-                    hidden={paginatorCount <= 5 ? true : false}
+                    hidden={paginatorCount <= 5 || pageCount === 0 ? true : false}
                     onClick={() => lowerButtonsThree()}>...</button>
                 {page.map((list) => {
                     return <button
