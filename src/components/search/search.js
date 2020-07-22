@@ -25,6 +25,17 @@ class Search extends Component {
             .catch(this.onErr);
     }
 
+    componentDidMount(){
+        if (localStorage.request !== ""){
+            this.searchRepos.current.value=localStorage.request;
+            this.props.setRequest(this.searchRepos.current.value)
+            this.gotService.getRepositories(localStorage.request, this.props.paginatorCount)
+            .then(this.props.setContent)
+            .catch(this.onErr);
+        }
+        // else{}
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.paginatorCount !== prevProps.paginatorCount) {
             this.gotService.getRepositories(this.props.request,this.props.paginatorCount)
@@ -33,7 +44,10 @@ class Search extends Component {
           }
     }
 
-    searchName = () => {this.props.setRequest(this.searchRepos.current.value)}
+    searchName = () => {this.props.setRequest(this.searchRepos.current.value);
+        localStorage.request =this.searchRepos.current.value}
+
+
 
     render() {
         if (this.props.error){
