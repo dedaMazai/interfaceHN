@@ -2,7 +2,7 @@ const initialState = {
     content: [],
     pageSize: 10,
     paginatorCount: 1,
-    totalCount: 1,
+    totalCount: 10,
     mainCard: 0,
     request: "",
     error: false
@@ -37,6 +37,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 content: action.payload,
                 totalCount: action.loadCount,
+            };
+        case 'SET_BEGIN_CONTENT':
+            return {
+                ...state,
+                content: action.payload,
+                totalCount: 10,
             };
         case 'ON_ERROR':
             return {

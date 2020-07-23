@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import gotService from '../../services/gotService';
 import { connect } from 'react-redux';
 import ErrorMessage from '../errorMessage';
-import {onError, setContent, setRequest} from '../../actions';
+import {onError, setContent, setRequest, setBeginContent} from '../../actions';
 
 import './search.css';
 
@@ -19,25 +19,31 @@ class Search extends Component {
         console.log('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
     }
 
-    updateRepositories = (request, num) => {
+    updateRepositories = (request, num=1, setContent=this.props.setContent) => {
         this.gotService.getRepositories(request, num)
-            .then(this.props.setContent)
+            .then(setContent)
             .catch(this.onErr);
     }
 
     componentDidMount(){
-        if (sessionStorage.request !== ""){
+        if (sessionStorage.request === undefined || sessionStorage.request === ""){
+            this.props.setRequest("stars:>100000")
+            this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
+        }else{
             this.searchRepos.current.value=sessionStorage.request;
             this.props.setRequest(this.searchRepos.current.value)
             this.updateRepositories(sessionStorage.request, this.props.paginatorCount)
         }
-        // else{}
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.paginatorCount !== prevProps.paginatorCount) {
             this.updateRepositories(this.props.request,this.props.paginatorCount)
           }
+        if (this.props.content.length === 0) {
+            this.props.setRequest("stars:>100000")
+            this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
+        }
     }
 
     searchName = () => {this.props.setRequest(this.searchRepos.current.value);
@@ -60,7 +66,7 @@ class Search extends Component {
                 <button className="searchBut"
                     type="submit"
                     disabled={this.props.request === "" ? true : false}
-                    onClick={() => this.updateRepositories(this.props.request, 1)}>
+                    onClick={() => this.updateRepositories(this.props.request)}>
                         <span role="img">
                             &#128269;
                         </span>
@@ -74,13 +80,15 @@ const mapStateToProps =  (state) =>{
     return {
         error: state.error,
         paginatorCount: state.paginatorCount,
-        request: state.request
+        request: state.request,
+        content: state.content
     }
 }
 
 const mapDispatchToProps = {
     setContent,
     setRequest,
+    setBeginContent,
     onError
 }
 

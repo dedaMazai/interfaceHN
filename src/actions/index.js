@@ -27,6 +27,13 @@ const setContent = (id) => {
     }
 }
 
+const setBeginContent = (id) => {
+    return {
+        type: 'SET_BEGIN_CONTENT',
+        payload: id.items
+    }
+}
+
 const onError = () => {
     return {
         type: 'ON_ERROR'
@@ -68,5 +75,6 @@ export {
     setContent,
     setRequest,
     setMainCard,
+    setBeginContent,
     onError
 };

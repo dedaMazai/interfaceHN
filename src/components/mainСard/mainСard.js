@@ -32,7 +32,7 @@ class MainСard extends Component {
                     </p>
                 </div>
                 <div className="information">
-                    <a className="nick" href={content[mainCard].urlPerson}>{content[mainCard].nickName}</a>
+                    <a className="nick" target="_blank" href={content[mainCard].urlPerson}>{content[mainCard].nickName}</a>
                     <br/>
                     <p>
                         Используемые языки: <br/>
