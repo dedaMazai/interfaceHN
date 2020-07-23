@@ -20,13 +20,14 @@ class Search extends Component {
     }
 
     updateRepositories = (request, num=1, setContent=this.props.setContent) => {
-        this.gotService.getRepositories(request, num)
+        this.gotService.getRepositories(request,num)
             .then(setContent)
             .catch(this.onErr);
     }
 
     componentDidMount(){
         if (sessionStorage.request === undefined || sessionStorage.request === ""){
+            this.searchRepos.current.value="";
             this.props.setRequest("stars:>100000")
             this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
         }else{
@@ -37,12 +38,19 @@ class Search extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.paginatorCount !== prevProps.paginatorCount) {
-            this.updateRepositories(this.props.request,this.props.paginatorCount)
-          }
         if (this.props.content.length === 0) {
             this.props.setRequest("stars:>100000")
             this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
+        }else{
+            if (this.props.paginatorCount !== prevProps.paginatorCount) {
+                if(sessionStorage.request === undefined || sessionStorage.request === ""){
+                    this.searchRepos.current.value="";
+                    this.props.setRequest("stars:>100000")
+                    this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
+                }else{
+                    this.updateRepositories(this.props.request,this.props.paginatorCount)
+                }
+              }
         }
     }
 

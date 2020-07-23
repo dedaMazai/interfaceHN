@@ -43,6 +43,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 content: action.payload,
                 totalCount: 10,
+                paginatorCount: 1
             };
         case 'ON_ERROR':
             return {
