@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import gotService from '../../services/gotService';
 import { connect } from 'react-redux';
-import ErrorMessage from '../errorMessage';
 import {onError, setContent, setRequest, setBeginContent} from '../../actions';
 
 import './search.css';
@@ -28,41 +27,31 @@ class Search extends Component {
     componentDidMount(){
         if (sessionStorage.request === undefined || sessionStorage.request === ""){
             this.searchRepos.current.value="";
-            this.props.setRequest("stars:>100000")
             this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
         }else{
             this.searchRepos.current.value=sessionStorage.request;
-            this.props.setRequest(this.searchRepos.current.value)
+            this.props.setRequest(sessionStorage.request)
             this.updateRepositories(sessionStorage.request, this.props.paginatorCount)
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.content.length === 0) {
-            this.props.setRequest("stars:>100000")
+        if (this.props.paginatorCount !== prevProps.paginatorCount) {
+            this.searchRepos.current.value=this.props.request
+            this.updateRepositories(this.props.request,this.props.paginatorCount)
+        }
+        if(sessionStorage.request === undefined || sessionStorage.request === "" || this.props.content.length === 0){
+            this.searchRepos.current.value="";
             this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
-        }else{
-            if (this.props.paginatorCount !== prevProps.paginatorCount) {
-                if(sessionStorage.request === undefined || sessionStorage.request === ""){
-                    this.searchRepos.current.value="";
-                    this.props.setRequest("stars:>100000")
-                    this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
-                }else{
-                    this.updateRepositories(this.props.request,this.props.paginatorCount)
-                }
-              }
         }
     }
 
-    searchName = () => {this.props.setRequest(this.searchRepos.current.value);
-        sessionStorage.request =this.searchRepos.current.value}
-
-
+    searchName = () => {
+        this.props.setRequest(this.searchRepos.current.value);
+        sessionStorage.request =this.searchRepos.current.value;
+    }
 
     render() {
-        if (this.props.error){
-            return <ErrorMessage/>
-        }
         return(
             <div className="search">
                 <input className="searchInput"
