@@ -7,28 +7,6 @@ import {setMainCard} from '../../actions';
 import './result.css';
 
 class Result extends Component {
-
-
-    // componentDidUpdate(prevProps) {
-    //     if (this.props.paginatorCount !== prevProps.paginatorCount) {
-    //         this.gotService.getRepositories(this.props.request,this.props.paginatorCount)
-    //         .then(this.props.setContent)
-    //         .catch(this.onErr);
-    //       }
-    // }
-
-    // updateChar = () => {
-    //     this.gotService.getRepositories()
-    //         .then(this.onTelLoaded)
-    //         .catch(function(e) {
-    //             console.log(`ERROR${e}`)
-    //          });
-    // }
-
-    // onTelLoaded = (tel) => {
-    //     console.log(tel)
-    // }
-
     render() {
         return(
             <div className="result">
@@ -43,17 +21,18 @@ class Result extends Component {
                         Последний комит
                     </li>
                     <li className="link">
-                        Ссылка: https://github.com...
+                        Ссылка:
                     </li>
                 </ul>
                 <ul>
                     {this.props.content.map(data => (
-                        <Link to = "/card">
                             <li key={data.id} className="line" onClick={()=>this.props.setMainCard(data.id)}>
                                 <ul className="bodyResult">
-                                    <li className="name" >
-                                        {data.name}
-                                    </li>
+                                    <Link to = "/card">
+                                        <li className="name">
+                                            {data.name}
+                                        </li>
+                                    </Link>
                                     <li className="stars">
                                         <span className="starSmall">&#9733;</span>{data.stars}
                                     </li>
@@ -61,11 +40,10 @@ class Result extends Component {
                                         {data.lastCommit}
                                     </li>
                                     <li className="link">
-                                        {data.urlRepositories}
+                                        <a href={data.urlRepositories} target="_blank">https://github.com...</a>
                                     </li>
                                 </ul>
                             </li>
-                        </Link>
                     ))}
                 </ul>
                 <div className="paginatorResult">

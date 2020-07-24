@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import img from './foto.jpg';
 import './mainСard.css';
 
 
@@ -11,13 +10,12 @@ class MainСard extends Component {
         let {content, mainCard} = this.props;
         return (
             <div className="mainСard">
-                {console.log(mainCard)}
                 <ul className="headerCard">
                     <li className="nameCard">
                         {content[mainCard].name}
                     </li>
                     <li className="starsCard">
-                        <span className="starBig">&#9733;</span>25
+                        <span className="starBig">&#9733;</span>{content[mainCard].stars}
                     </li>
                     <li className="commitCard">
                         <p>Последний комит:</p>

@@ -36,19 +36,19 @@ li {
 }
 .stars {
     position: absolute;
-    margin-left: 280px;
+    margin-left: 360px;
     margin-top: -10px;
     width: 150px;
 }
 .commit {
     position: absolute;
-    margin-left: 430px;
+    margin-left: 510px;
     margin-top: -10px;
     width: 150px;
 }
 .link {
     position: absolute;
-    margin-left: 600px;
+    margin-left: 680px;
     margin-top: -10px;
     width: 250px;
 }
