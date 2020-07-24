@@ -20,7 +20,7 @@ class Result extends Component {
                     <li className="commit">
                         Последний комит
                     </li>
-                    <li className="link">
+                    <li className="link1">
                         Ссылка:
                     </li>
                 </ul>
@@ -32,13 +32,13 @@ class Result extends Component {
                                         <li className="name">
                                             {data.name}
                                         </li>
+                                        <li className="stars">
+                                            <span className="starSmall">&#9733;</span>{data.stars}
+                                        </li>
+                                        <li className="commit">
+                                            {data.lastCommit}
+                                        </li>
                                     </Link>
-                                    <li className="stars">
-                                        <span className="starSmall">&#9733;</span>{data.stars}
-                                    </li>
-                                    <li className="commit">
-                                        {data.lastCommit}
-                                    </li>
                                     <li className="link">
                                         <a href={data.urlRepositories} target="_blank">https://github.com...</a>
                                     </li>

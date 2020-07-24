@@ -32,7 +32,7 @@ li {
     position: absolute;
     margin-left: 0px;
     margin-top: -10px;
-    width: 280px;
+    width: 360px;
 }
 .stars {
     position: absolute;
@@ -44,7 +44,7 @@ li {
     position: absolute;
     margin-left: 510px;
     margin-top: -10px;
-    width: 150px;
+    width: 170px;
 }
 .link {
     position: absolute;
@@ -52,11 +52,11 @@ li {
     margin-top: -10px;
     width: 250px;
 }
-/* .link1 {
+.link1 {
     position: absolute;
-    margin-left: 680px;
+    margin-left: 730px;
     margin-top: -10px;
-} */
+}
 .starSmall {
     color: yellow;
     margin-right: 3px;

@@ -28,8 +28,10 @@ class Search extends Component {
     }
 
     componentDidMount(){
-        this.searchRepos.current.value=this.props.request;
-        this.props.setRequest(sessionStorage.request)
+        if (sessionStorage.request !== undefined && sessionStorage.request !== ""){
+            this.searchRepos.current.value=this.props.request;
+            this.props.setRequest(sessionStorage.request)
+        }
         this.updateRepositories(sessionStorage.request, this.props.paginatorCount)
     }
 
@@ -46,7 +48,7 @@ class Search extends Component {
 
     searchName = () => {
         this.props.setRequest(this.searchRepos.current.value);
-        sessionStorage.request =this.searchRepos.current.value;
+        sessionStorage.request = this.searchRepos.current.value;
     }
 
     topName = () => {
