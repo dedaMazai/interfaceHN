@@ -40,7 +40,9 @@ class Result extends Component {
                                         </li>
                                     </Link>
                                     <li className="link">
-                                        <a href={data.urlRepositories} target="_blank">https://github.com...</a>
+                                        <a href={data.urlRepositories}
+                                            rel= "noopener noreferrer"
+                                            target="_blank">https://github.com...</a>
                                     </li>
                                 </ul>
                             </li>

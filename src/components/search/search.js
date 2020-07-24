@@ -59,23 +59,26 @@ class Search extends Component {
     render() {
         return(
             <div className="search">
+                <button className="topBut"
+                    type="submit"
+                    onClick={() => {
+                        this.updateRepositories("stars:>100000", 1, this.props.setBeginContent);
+                        this.topName()}}>
+                            <span role="img" aria-label="Top">
+                                &#9733;
+                            </span>
+                </button>
                 <input className="searchInput"
                     onkeyup="stule:background: #ff5e00;"
                     type="text"
                     placeholder="Искать здесь..."
                     ref={this.searchRepos}
                     onChange={this.searchName}/>
-                <button className="topBut"
-                    type="submit"
-                    onClick={() => {
-                        this.updateRepositories("stars:>100000", 1, this.props.setBeginContent);
-                        this.topName()}
-                        }>&#9733;</button>
                 <button className="searchBut"
                     type="submit"
                     disabled={this.props.request === "" || this.props.request === undefined ? true : false}
                     onClick={() => this.updateRepositories(this.props.request)}>
-                        <span role="img">
+                        <span role="img" aria-label="Search">
                             &#128269;
                         </span>
                 </button>
