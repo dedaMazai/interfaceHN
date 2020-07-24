@@ -1,5 +1,5 @@
 const initialState = {
-    content: [],
+    content: [0],
     pageSize: 10,
     paginatorCount: 1,
     totalCount: 10,

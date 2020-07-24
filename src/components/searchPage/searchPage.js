@@ -7,10 +7,31 @@ import './searchPage.css';
 
 
 class SearchPage extends Component {
+    constructor() {
+        super();
+        this.state = {
+            seconds: 30
+        };
+        this.timer = 0;
+    }
+    startTimer = () => {
+        if (this.timer === 0 && this.state.seconds > 0) {
+          this.timer = setInterval(this.countDown, 1000);
+        }
+    }
+    countDown = () => {
+        let seconds = this.state.seconds - 1;
+        this.setState({seconds: seconds});
+        if (seconds === 0) {
+            clearInterval(this.timer);
+            window.location.reload()
+        }
+    }
     render() {
         if (this.props.error){
+            this.startTimer()
             return <div className="error">
-                <h1>Подождите 10 сек. и обновите страницу... </h1>
+                <h1>Подождите {this.state.seconds} сек. и страница обновится... </h1>
                 <p>Превышен предел скорости работы API </p>
             </div>
         }

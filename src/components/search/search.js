@@ -19,28 +19,26 @@ class Search extends Component {
     }
 
     updateRepositories = (request, num=1, setContent=this.props.setContent) => {
-        this.gotService.getRepositories(request,num)
-            .then(setContent)
+        this.gotService.getRepositories(
+            request === undefined || request === "" ? "stars:>100000" : request,
+            request === undefined || request === "" ? "1" : num
+            )
+            .then(request === undefined || request === "" ? this.props.setBeginContent : setContent)
             .catch(this.onErr);
     }
 
     componentDidMount(){
-        if (sessionStorage.request === undefined || sessionStorage.request === ""){
-            this.searchRepos.current.value="";
-            this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
-        }else{
-            this.searchRepos.current.value=sessionStorage.request;
-            this.props.setRequest(sessionStorage.request)
-            this.updateRepositories(sessionStorage.request, this.props.paginatorCount)
-        }
+        this.searchRepos.current.value=this.props.request;
+        this.props.setRequest(sessionStorage.request)
+        this.updateRepositories(sessionStorage.request, this.props.paginatorCount)
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.paginatorCount !== prevProps.paginatorCount) {
-            this.searchRepos.current.value=this.props.request
-            this.updateRepositories(this.props.request,this.props.paginatorCount)
+            this.searchRepos.current.value=this.props.request;
+            this.updateRepositories(sessionStorage.request,this.props.paginatorCount)
         }
-        if(sessionStorage.request === undefined || sessionStorage.request === "" || this.props.content.length === 0){
+        if(this.props.content.length === 0){
             this.searchRepos.current.value="";
             this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
         }
@@ -49,6 +47,11 @@ class Search extends Component {
     searchName = () => {
         this.props.setRequest(this.searchRepos.current.value);
         sessionStorage.request =this.searchRepos.current.value;
+    }
+
+    topName = () => {
+        this.props.setRequest("");
+        delete sessionStorage.request;
     }
 
     render() {
@@ -60,9 +63,15 @@ class Search extends Component {
                     placeholder="Искать здесь..."
                     ref={this.searchRepos}
                     onChange={this.searchName}/>
+                <button className="topBut"
+                    type="submit"
+                    onClick={() => {
+                        this.updateRepositories("stars:>100000", 1, this.props.setBeginContent);
+                        this.topName()}
+                        }>&#9733;</button>
                 <button className="searchBut"
                     type="submit"
-                    disabled={this.props.request === "" ? true : false}
+                    disabled={this.props.request === "" || this.props.request === undefined ? true : false}
                     onClick={() => this.updateRepositories(this.props.request)}>
                         <span role="img">
                             &#128269;

@@ -8,7 +8,7 @@
   height: 45px;
   padding-left: 10px;
   border: 2px solid #59687a;
-  border-radius: 5px;
+  border-radius: 0  5px  5px  0;
   outline: none;
   background: #c3c3ce;
   color: #59687a;;
@@ -29,5 +29,22 @@
   cursor: pointer;
 }
 .searchBut:active {
+  background: #48576b;
+}
+.topBut {
+  position: absolute; 
+  top: 0;
+  left: -45px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background: #59687a;
+  border-radius: 5px 0 0 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: x-large;
+  color: rgb(167, 245, 104);
+}
+.topBut:active {
   background: #48576b;
 }
