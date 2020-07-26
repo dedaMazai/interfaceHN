@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import SearchPage from '../searchPage';
 import MainСard from '../mainСard';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './app.css';
 
 
-export default class App extends Component {
+class App extends Component {
     render() {
         return (
             <Switch>
@@ -16,3 +17,12 @@ export default class App extends Component {
         )
     }
 }
+const mapStateToProps =  (state) =>{
+    return {
+        mainCard: state.mainCard
+    }
+}
+
+
+
+export default connect(mapStateToProps)(App);

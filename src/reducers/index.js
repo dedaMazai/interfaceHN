@@ -3,7 +3,6 @@ const initialState = {
     pageSize: 10,
     paginatorCount: 1,
     totalCount: 10,
-    mainCard: 0,
     request: "",
     error: false
 }
@@ -20,18 +19,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 request: action.payload
             };
-        case 'SET_MAIN_CARD':
-            return {
-                ...state,
-                mainCard: action.payload
-            };
-            // case 'SET_MAIN_CARD':
-            // const id = action.payload,
-            //       item = state.content.find(item => item.id ===id);
-            // return {
-            //     ...state,
-            //     mainCard: item
-            // };
+        // case 'SET_MAIN_CARD':
+        //     const id = action.payload,
+        //           item = state.content.find(item => item.id ===id);
+        //     return {
+        //         ...state,
+        //         mainCard: item
+        //     };
         case 'SET_CONTENT':
             return {
                 ...state,

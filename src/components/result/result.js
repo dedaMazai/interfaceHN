@@ -2,11 +2,21 @@ import React, {Component} from 'react';
 import Paginator from '../paginator';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {setMainCard} from '../../actions';
 
 import './result.css';
 
 class Result extends Component {
+    setMainCard = (id) => {
+        const item = this.props.content.find(item => item.id ===id);
+        sessionStorage.name = item.name;
+        sessionStorage.stars = item.stars;
+        sessionStorage.lastCommit = item.lastCommit;
+        sessionStorage.photo = item.photo;
+        sessionStorage.contributorsUrl = item.contributorsUrl;
+        sessionStorage.urlPerson = item.urlPerson;
+        sessionStorage.language = item.language;
+        sessionStorage.description = item.description;
+    }
     render() {
         return(
             <div className="result">
@@ -26,7 +36,7 @@ class Result extends Component {
                 </ul>
                 <ul>
                     {this.props.content.map(data => (
-                            <li key={data.id} className="line" onClick={()=>this.props.setMainCard(data.id)}>
+                            <li key={data.id} className="line" onClick={()=>this.setMainCard(data.id)}>
                                 <ul className="bodyResult">
                                     <Link to = "/card">
                                         <li className="name">
@@ -57,14 +67,9 @@ class Result extends Component {
 }
 const mapStateToProps =  (state) =>{
     return {
-        content: state.content,
-        mainCard: state.mainCard
+        content: state.content
     }
 }
 
-const mapDispatchToProps = {
-    setMainCard
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Result);
+export default connect(mapStateToProps)(Result);
