@@ -6,28 +6,15 @@ import './paginator.css';
 
 
 class Paginator extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    //     this.myRefReg = React.createRef();
-    //   }
-
-    // componentDidMount(){
-    //     let page = "";
-    //     for (var i = 0; i < Math.ceil(this.props.page / 10); i++) {
-    //     page += "<span data-page=" + i * 5 + "  id=\"page" + (i + 1) + "\">" + (i + 1) + "</span>";
-    //     }
-    //     this.myRefReg.current.innerHTML = page;
-    // }
-
     render() {
         let {pageSize, totalCount, paginatorCount, selectBut, lowerButtons, upButtons, upButtonsThree, lowerButtonsThree} = this.props,
-            pageCount = Math.ceil(totalCount / pageSize) < 100  ? Math.ceil(totalCount / pageSize) : 100,
+            pageCount = Math.ceil(totalCount / pageSize) < 100  ? Math.ceil(totalCount / pageSize) : 100, //API имеет ограничение в 100 страниц
             page = [];
 
         for (let i=2; i < pageCount; i++) {
             page.push(i);
         }
+        //заполнили массив с номерами страниц
 
 
         if (paginatorCount < 5){
@@ -42,7 +29,7 @@ class Paginator extends Component {
             page.splice(paginatorCount+1);
             page.splice(0, paginatorCount-4);
         }
-        //можно было оставить только последнее else, но будет не так комфортно юзать пагинатор
+        //можно оставить только последнее условие в else, но будет не так комфортно юзать пагинатор
 
         return(
             <div className="paginator">

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import gotService from '../../services/gotService';
 import { connect } from 'react-redux';
-import {onError, setContent, setRequest, setBeginContent} from '../../actions';
+import {onError, setContent, setRequest, setBeginContent, selectBut} from '../../actions';
 
 import './search.css';
 
@@ -26,7 +26,8 @@ class Search extends Component {
             .then(request === undefined || request === "" ? this.props.setBeginContent : setContent)
             .catch(this.onErr);
     }
-
+    //общая функция для запроса репозиториев, если запрос пустой, или undefined, то выполняется запрос самых популярных
+    //и выводятся только первые 10
     componentDidMount(){
         if (sessionStorage.request !== undefined && sessionStorage.request !== ""){
             this.searchRepos.current.value=this.props.request;
@@ -40,21 +41,32 @@ class Search extends Component {
             this.searchRepos.current.value=this.props.request;
             this.updateRepositories(sessionStorage.request,this.props.paginatorCount)
         }
+        //для обновления страницы с репозиториями при клике по пагинатору
+        if (this.props.request !== prevProps.request) {
+            this.props.selectBut(1)
+        }
+        //при новом поиске, чтобы открывалась 1 страица пагинатора
         if(this.props.content.length === 0){
             this.searchRepos.current.value="";
-            this.updateRepositories("stars:>100000", 1, this.props.setBeginContent)
+            this.updateRepositories("stars:>100000", 1, this.props.setBeginContent);
+            this.searchRepos.current.value="Not found";
         }
+        //если при поиске не удалось найти репозитории с необходимым названием,
+        // производится запрос самых популярных и вывод первых 10
     }
 
     searchName = () => {
         this.props.setRequest(this.searchRepos.current.value);
         sessionStorage.request = this.searchRepos.current.value;
     }
+    //при в вводе в поисковую строку запрос запишется в state и sessionStorage, в state я записываю чтобы проверять на наличие
+    //символов для активации кнопки поиска, если они есть, с sessionStorage возникли проблемы в этом функционале
 
     topName = () => {
         this.props.setRequest("");
         delete sessionStorage.request;
     }
+    //очищаем state и sessionStorage для запроса самых популярных репозиториев
 
     render() {
         return(
@@ -100,6 +112,7 @@ const mapDispatchToProps = {
     setContent,
     setRequest,
     setBeginContent,
+    selectBut,
     onError
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './errorMessage.css';
-import img from './error404.jpg';
+import img from './1.png';
 const ErrorMessage = () => {
     return (
         <div className="error">

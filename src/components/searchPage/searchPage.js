@@ -27,6 +27,8 @@ class SearchPage extends Component {
             window.location.reload()
         }
     }
+    //таймер по истечении которого происходит обновление страницы, отображается когда возникает ошибка 403
+    //при превышении скорости запросов API
     render() {
         if (this.props.error){
             this.startTimer()

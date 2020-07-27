@@ -16,7 +16,10 @@ class Result extends Component {
         sessionStorage.urlPerson = item.urlPerson;
         sessionStorage.language = item.language;
         sessionStorage.description = item.description;
+        sessionStorage.nickName = item.nickName;
     }
+    //при клике на репозиторий, он находится в общем списке и в sessionStorage записываются необходимые данные для mainPage,
+    //что бы при перезагрузке mainPage данные не пропадали
     render() {
         return(
             <div className="result">

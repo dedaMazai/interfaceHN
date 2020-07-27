@@ -53,6 +53,11 @@ img {
     font-size: 170%;
     color: rgb(4, 0, 255) !important;
 }
+.contributorsImg {
+    border-radius: 15px;
+    height: 45px;
+    margin: 5px 5px 0px 0px;
+}
 .exitBut {
     position:absolute;
     bottom: 50px;

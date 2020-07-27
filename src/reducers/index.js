@@ -1,5 +1,6 @@
 const initialState = {
     content: [0],
+    contributors: [0],
     pageSize: 10,
     paginatorCount: 1,
     totalCount: 10,
@@ -9,7 +10,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SELECT_BUTTONS':
+        case 'SELECT_BUTTONS(PAGINATOR)':
             return {
                 ...state,
                 paginatorCount: action.payload
@@ -19,18 +20,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 request: action.payload
             };
-        // case 'SET_MAIN_CARD':
-        //     const id = action.payload,
-        //           item = state.content.find(item => item.id ===id);
-        //     return {
-        //         ...state,
-        //         mainCard: item
-        //     };
         case 'SET_CONTENT':
             return {
                 ...state,
                 content: action.payload,
                 totalCount: action.loadCount,
+            };
+        case 'SET_CONTRIBUTORS':
+            return {
+                ...state,
+                contributors: action.payload
             };
         case 'SET_BEGIN_CONTENT':
             return {

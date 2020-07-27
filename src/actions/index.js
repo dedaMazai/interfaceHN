@@ -1,6 +1,6 @@
 const selectBut = (id) => {
     return {
-        type: 'SELECT_BUTTONS',
+        type: 'SELECT_BUTTONS(PAGINATOR)',
         payload: id
     }
 }
@@ -17,6 +17,13 @@ const setContent = (id) => {
         type: 'SET_CONTENT',
         payload: id.items,
         loadCount: id.totalCount
+    }
+}
+
+const setСontributors = (id) => {
+    return {
+        type: 'SET_CONTRIBUTORS',
+        payload: id.сontributors
     }
 }
 
@@ -68,5 +75,6 @@ export {
     setContent,
     setRequest,
     setBeginContent,
+    setСontributors,
     onError
 };
