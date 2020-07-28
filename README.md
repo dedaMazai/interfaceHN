@@ -5,7 +5,7 @@
 * `на 1 странице` производится поиск репозиториев и вывод списка найденых по 10, и Paginator для перехода к следующим 10 найденым репозиториям, при обновлении страницы данные поиска сохраняются. Сортировка списка репозиториев по колличеству звезд.
 * `на 2 странице` отображается карточка выбраного репозитория из списка, при обновлении страницы данные сохраняются.
 
-<div style="width:500px;max-width:100%;"><div style="height:0;padding-bottom:46.8%;position:relative;"><iframe width="500" height="234" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameBorder="0" src="https://imgflip.com/embed/49mvzh"></iframe></div><p><a href="https://imgflip.com/gif/49mvzh">via Imgflip</a></p></div>
+<a href="https://imgflip.com/gif/49mvzh">via Imgflip</a>
 
 ## Available Scripts
 
