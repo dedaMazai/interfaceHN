@@ -1,10 +1,8 @@
 const initialState = {
-    content: [0],
-    contributors: [0],
+    content: [],
     pageSize: 10,
     paginatorCount: 1,
     totalCount: 10,
-    request: "",
     error: false
 }
 
@@ -15,28 +13,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 paginatorCount: action.payload
             };
-        case 'SET_REQUEST':
-            return {
-                ...state,
-                request: action.payload
-            };
         case 'SET_CONTENT':
             return {
                 ...state,
-                content: action.payload,
-                totalCount: action.loadCount,
-            };
-        case 'SET_CONTRIBUTORS':
-            return {
-                ...state,
-                contributors: action.payload
-            };
-        case 'SET_BEGIN_CONTENT':
-            return {
-                ...state,
-                content: action.payload,
-                totalCount: 10,
-                paginatorCount: 1
+                content: action.payload
             };
         case 'ON_ERROR':
             return {

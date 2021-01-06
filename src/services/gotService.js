@@ -1,6 +1,6 @@
 export default class GotService {
     constructor() {
-        this._apiBase = 'https://api.github.com';
+        this._apiBase = 'https://hacker-news.firebaseio.com/v0';
     }
     getResource = async (url) => {
         const res = await fetch(url);
@@ -12,18 +12,18 @@ export default class GotService {
 
         return await res.json();
     }
-
-    getRepositories = async (request, page) => {
-        const Repositories = await this.getResource(`${this._apiBase}/search/repositories?q=${request}+in:name&sort=stars&order=desc&page=${page}&per_page=10`);
-        return this._transformRepositories(Repositories);
+    getStories = async () => {
+        let allStories = await this.getResource(`${this._apiBase}/newstories.json?orderBy="$key"&limitToFirst=100`);
+        // запрос id последних 100 новостей
+        let i=1;
+        let stories = await allStories.map(
+            async (id) => {
+                let story = await this.getResource(`${this._apiBase}/item/${id}.json`); // запрос новости по id
+                return {...this._transformStory(story), id: i++}; // форматируем новость в удобный формат
+            });
+        return stories;
     }
-    // запрос репозиториев
-
-    getСontributors = async (request) => {
-        const Repositories = await this.getResource(request);
-        return this._transformСontributors(Repositories);
-    }
-    // запрос контрибьютеров
+    // запрос информации для 100 новостей
 
     isSet(data) {
         if (data) {
@@ -32,7 +32,7 @@ export default class GotService {
             return 0
         }
     }
-
+    // проверка на наличие числа
     isSetString(data) {
         if (data) {
             return data
@@ -40,52 +40,21 @@ export default class GotService {
             return "No information."
         }
     }
-
-    lengthString(data, size) {
-        if (data.length < size) {
-            return data
-        } else {
-            return data.substr(0, size)+"..."
-        }
+    // проверка на наличие строки информации
+    _transformStory = (story) => {
+        return (
+            {
+                title: this.isSetString(story.title),
+                score: this.isSet(story.score),
+                time: this.isSet(story.time),
+                comment: this.isSet(story.kids),
+                by: this.isSet(story.by)
+            }
+        );
     }
-
-    _extractDate = (item) => {
-        const updatedDate = /^[0-9]{4}(-[0-9]{2}){2}/;
-        return item.match(updatedDate)[0];
-    }
-
-    _transformRepositories = (Reposit) => {
-        let i=0;
-        return {
-            totalCount: this.isSet(Reposit.total_count),
-            items: Reposit.items.map((data) =>{
-                return (
-                    {name: this.lengthString(data.name, 28),
-                    stars: this.isSet(data.stargazers_count),
-                    lastCommit: this._extractDate(data.updated_at),
-                    urlRepositories: this.isSet(data.html_url),
-                    urlPerson: this.isSet(data.owner.html_url),
-                    language: this.isSetString(data.language),
-                    nickName: this.isSetString(data.owner.login),
-                    description: this.isSetString(data.description),
-                    contributorsUrl: this.isSet(data.contributors_url),
-                    photo: this.isSet(data.owner.avatar_url),
-                    id: i++}
-                )
-            })
-        };
-    }
-    _transformСontributors = (Reposit) => {
-        let i=0;
-        return {
-            сontributors: Reposit.splice(0, 10).map((data) =>{
-                return (
-                    {name: this.lengthString(data.login, 11),
-                    photo: this.isSet(data.avatar_url),
-                    urlPerson: this.isSet(data.html_url),
-                    id: i++}
-                )
-            })
-        };
-    }
+    //отформатировали данные и проверили что они не пустые
 }
+
+// let unixTimestamp = 1607609370;
+// let date = new Date(unixTimestamp * 1000);
+// console.log(date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate());

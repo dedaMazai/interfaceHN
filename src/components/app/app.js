@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import SearchPage from '../searchPage';
-import MainСard from '../mainСard';
+import MainPage from '../mainPage';
+import Article from '../article';
+import Header from '../header';
 import { Route, Switch } from 'react-router-dom';
 
 import './app.css';
@@ -9,10 +10,13 @@ import './app.css';
 export default class App extends Component {
     render() {
         return (
-            <Switch>
-                <Route path = '/' exact component={SearchPage}/>
-                <Route path = '/card' exact component={MainСard}/>
-            </Switch>
+            <>
+                <Header/>
+                <Switch>
+                    <Route path = '/' exact component={MainPage}/>
+                    <Route path = '/card' exact component={Article}/>
+                </Switch>
+            </>
         )
     }
 }

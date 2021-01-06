@@ -8,7 +8,8 @@ import './paginator.css';
 class Paginator extends Component {
     render() {
         let {pageSize, totalCount, paginatorCount, selectBut, lowerButtons, upButtons, upButtonsThree, lowerButtonsThree} = this.props,
-            pageCount = Math.ceil(totalCount / pageSize) < 100  ? Math.ceil(totalCount / pageSize) : 100, //API имеет ограничение в 100 страниц
+            // pageCount = Math.ceil(totalCount / pageSize) < 100  ? Math.ceil(totalCount / pageSize) : 100, //если API имеет ограничение в 100 страниц
+            pageCount = 50,
             page = [];
 
         for (let i=2; i < pageCount; i++) {

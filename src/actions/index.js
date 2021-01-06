@@ -5,32 +5,10 @@ const selectBut = (id) => {
     }
 }
 
-const setRequest = (id) => {
-    return {
-        type: 'SET_REQUEST',
-        payload: id
-    }
-}
-
 const setContent = (id) => {
     return {
         type: 'SET_CONTENT',
-        payload: id.items,
-        loadCount: id.totalCount
-    }
-}
-
-const setСontributors = (id) => {
-    return {
-        type: 'SET_CONTRIBUTORS',
-        payload: id.сontributors
-    }
-}
-
-const setBeginContent = (id) => {
-    return {
-        type: 'SET_BEGIN_CONTENT',
-        payload: id.items
+        payload: id
     }
 }
 
@@ -73,8 +51,5 @@ export {
     upButtonsThree,
     lowerButtonsThree,
     setContent,
-    setRequest,
-    setBeginContent,
-    setСontributors,
     onError
 };
