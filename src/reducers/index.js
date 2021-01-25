@@ -14,10 +14,17 @@ const reducer = (state = initialState, action) => {
                 paginatorCount: action.payload
             };
         case 'SET_CONTENT':
+            let array = state.content;
+            array.push(action.payload)
             return {
                 ...state,
-                content: action.payload
+                content: array
             };
+        case 'CLEAR_CONTENT':
+        return {
+            ...state,
+            content: []
+        };
         case 'ON_ERROR':
             return {
                 ...state,

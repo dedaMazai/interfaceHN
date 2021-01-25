@@ -12,6 +12,13 @@ const setContent = (id) => {
     }
 }
 
+const clearContent = () => {
+    return {
+        type: 'CLEAR_CONTENT'
+    }
+}
+
+
 const onError = () => {
     return {
         type: 'ON_ERROR'
@@ -51,5 +58,6 @@ export {
     upButtonsThree,
     lowerButtonsThree,
     setContent,
+    clearContent,
     onError
 };
