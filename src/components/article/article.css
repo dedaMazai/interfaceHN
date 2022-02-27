@@ -9,7 +9,13 @@
     min-height: 600px;
 }
 
-a {
+h2 {
+    text-align: center;
+    font-weight: 500;
+    width: 100%;
+}
+
+.articleHeader > a {
     text-align: center;
     font-weight: 500;
     width: 100%;

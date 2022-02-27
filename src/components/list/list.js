@@ -9,6 +9,10 @@ import './list.css';
 class List extends Component {
     constructor() {
         super();
+        this.state = {
+            minute: 1
+        };
+        this.timer = 0;
         this._apiBase = 'https://hacker-news.firebaseio.com/v0';
     }
 
@@ -31,7 +35,6 @@ class List extends Component {
             .then(
                 (allStories) => allStories.map(
                 async (id) => {
-                    console.log(id)
                     let story = await this.getResource(`${this._apiBase}/item/${id}.json`); // запрос новости по id
                     this.props.setContent({...this._transformStory(story), id: i++});
                     this.forceUpdate();
@@ -82,8 +85,23 @@ class List extends Component {
         console.log('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
     }
 
+    startTimer = () => {
+        if (this.timer === 0 && this.state.minute > 0) {
+          this.timer = setInterval(this.countDown, 60000);
+        }
+    }
+    countDown = () => {
+        let minute = this.state.minute - 1;
+        this.setState({seconds: minute});
+        if (minute === 0) {
+            clearInterval(this.timer);
+            window.location.reload()
+        }
+    }
+
     componentWillMount(){
         this.clearStories();
+        this.startTimer();
     }
 
     parseDate = (data) => {
