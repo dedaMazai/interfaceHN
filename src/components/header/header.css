@@ -1,0 +1,17 @@
+.headerApp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ECE9E9;
+    padding: 0px;
+    margin: 0px 0px 20px 0px;
+    height: 70px;
+}
+
+.headerApp h2 {
+    color: rgb(0, 0, 0);
+    padding: 0px;
+    margin: 0px auto;
+    font-weight: bold;
+    cursor: pointer
+}

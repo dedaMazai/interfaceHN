@@ -1,0 +1,100 @@
+.list {
+    position: relative;
+    width: 900px;
+    margin: 0px auto 50px;
+    background-color: #ECE9E9;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+li {
+    position: relative;
+    display: inline;
+    list-style-type: none;
+}
+
+.headerList {
+    background-color: #c9c1b7;
+    padding: 20px;
+    margin-bottom: 3px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.bodyList {
+    background-color: #C4C4C4;
+    margin: 0px 0px 2px 0px;
+    padding: 20px;
+}
+
+.bodyList:hover {
+    background-color: #ECE9E9;
+}
+
+.name {
+    position: absolute;
+    display: flex;
+    margin-left: 0px;
+    margin-top: -10px;
+    width: 360px;
+}
+
+.name > span {
+    font-size: 1.5em;
+    color: #5c5854;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: -5px;
+    padding: 0px 4px;
+    cursor: pointer;
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.name > span:hover {
+    background-color: #aca39a;
+}
+
+.bodyList > .score {
+    padding-left: 20px;
+    width: 50px;
+}
+
+.bodyList > .author {
+    padding-left: 40px;
+}
+
+.bodyList > .date {
+    margin-left: 500px;
+}
+
+.score {
+    position: absolute;
+    margin-left: 360px;
+    margin-top: -10px;
+    width: 150px;
+}
+
+.date {
+    position: absolute;
+    margin-left: 530px;
+    margin-top: -10px;
+    width: 170px;
+}
+
+.author {
+    position: absolute;
+    margin-left: 680px;
+    margin-top: -10px;
+    width: 250px;
+}
+
+.author1 {
+    position: absolute;
+    margin-left: 730px;
+    margin-top: -10px;
+}

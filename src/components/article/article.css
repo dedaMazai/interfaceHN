@@ -1,0 +1,73 @@
+.article {
+    position: relative;
+    width: 75%;
+    margin: 0px auto;
+    background-color: #ECE9E9;
+    border-radius: 5px;
+    padding: 15px 30px 30px 30px;
+    overflow: hidden;
+    min-height: 600px;
+}
+
+a {
+    text-align: center;
+    font-weight: 500;
+    width: 100%;
+}
+
+.articleHeader > span {
+    font-size: 1.5em;
+    color: rgb(179, 179, 179);
+    text-align: center;
+    font-weight: 500;
+    width: 30px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.articleHeader > span:hover {
+    background-color: rgb(223, 223, 223);
+}
+
+.articleHeader {
+    display: flex;
+}
+
+.articleBody {
+    display: flex;
+
+}
+
+.articleComments {
+    width: 85%;
+    margin: 0px 10px;
+}
+
+.comment {
+    margin: 10px 0px;
+    width: 80%;
+}
+
+.commentChild {
+    margin: 10px 0px 10px 40px;
+    width: 80%;
+}
+
+.commentPerson {
+    font-weight: 500;
+}
+
+.articleInformation {
+    width: 15%;
+    margin: 10px 0px;
+}
+
+.articleInformation h3 {
+    margin: 5px 0px;
+}
