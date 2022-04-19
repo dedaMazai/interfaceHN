@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {onError} from '../../actions';
 import { Link } from 'react-router-dom';
 import Header from '../header';
-import { connect } from 'react-redux';
+import { connect }  from 'react-redux';
+import { setComment, clearComment }  from '../../actions';
 
 import './article.css';
 
@@ -22,23 +23,22 @@ class Article extends Component {
     }
 
     getCom = (comments) => {
+        let i = 1;
         if (comments.constructor === Array) {
             comments.map(
                 async (id) => {
                     let comment = await this.getResource(`${this._apiBase}/item/${id}.json`);
-                    let kidsComment = this.control(comment.kids);
-                    return {...this._transformComment(comment), kidsComment}
+                    this.props.setComment({...this._transformStory(comment), id: i++});
                 }
             )
         }else{
             let comment = async () => { return await this.getResource(`${this._apiBase}/item/${comments}.json`) };
-            let kidsComment = this.control(comment.kids);
-            return {...this._transformComment(comment), kidsComment}
+            return {...this._transformComment(comment)}
         }
     }
 
     control = (id) => {
-        if (id === undefined || id === null || id === null) {
+        if (id === undefined || id === null || id === "") {
             return
         }else{
             return this.getCom(id)
@@ -64,7 +64,7 @@ class Article extends Component {
             {
                 text: this.isSetString(comment.text),
                 time: this.isSet(comment.time),
-                comment: comment.kids,
+                kids: comment.kids,
                 by: this.isSetString(comment.by)
             }
         );
@@ -91,7 +91,7 @@ class Article extends Component {
         console.log('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack);
     }
 
-    componentDidMount () {
+    componentWillMount () {
         console.log(this.getCom(sessionStorage.comment));
     }
     render() {
@@ -101,7 +101,7 @@ class Article extends Component {
                 <div className="article">
                     <div className="articleHeader">
                         <span>&#8635;</span>
-                        <a  href={sessionStorage.url == 0 || sessionStorage.url === undefined ? false : sessionStorage.url}
+                        <a  href={sessionStorage.url === 0 || sessionStorage.url === undefined ? false : sessionStorage.url}
                             rel= "noopener noreferrer"
                             target="_blank"><h2>{sessionStorage.title}</h2>
                         </a>
@@ -109,6 +109,12 @@ class Article extends Component {
                     <hr noshade="true" size="5"/>
                     <div className="articleBody">
                         <div className="articleComments">
+                            {/* {this.props.comment.map(data => (
+                                <div className="comment">
+                                    <p className="commentPerson">{data.by}</p>
+                                    <p className="commentMessage">{data.text}</p>
+                                </div>
+                            ))} */}
                             <div className="comment">
                                 <p className="commentPerson">Михаил</p>
                                 <p className="commentMessage">Кометарии Кометарии Кометарии Кометарии Кометарии Кометарии Кометарии Кометарии Кометарии Кометарии</p>
@@ -137,11 +143,13 @@ class Article extends Component {
 
 const mapStateToProps =  (state) =>{
     return {
-        contributors: state.contributors
+        comment: state.comment
     }
 }
 
 const mapDispatchToProps = {
+    setComment,
+    clearComment,
     onError
 }
 

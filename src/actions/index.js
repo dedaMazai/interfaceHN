@@ -11,6 +11,19 @@ const clearContent = () => {
     }
 }
 
+const setComment = (id) => {
+    return {
+        type: 'SET_COMMENTS',
+        payload: id
+    }
+}
+
+const clearComment = () => {
+    return {
+        type: 'CLEAR_COMMENTS'
+    }
+}
+
 
 const onError = () => {
     return {
@@ -21,5 +34,7 @@ const onError = () => {
 export {
     setContent,
     clearContent,
+    setComment,
+    clearComment,
     onError
 };

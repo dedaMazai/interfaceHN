@@ -1,5 +1,6 @@
 const initialState = {
     content: [],
+    comments: [],
     error: false
 }
 
@@ -16,6 +17,18 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             content: []
+        };
+        case 'SET_COMMENTS':
+            let arr = state.comments;
+            arr.push(action.payload)
+            return {
+                ...state,
+                comments: array.sort( (a, b) => a.time - b.time ).reverse()
+            };
+        case 'CLEAR_COMMENTS':
+        return {
+            ...state,
+            comments: []
         };
         case 'ON_ERROR':
             return {
